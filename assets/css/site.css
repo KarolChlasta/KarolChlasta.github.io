@@ -1,0 +1,488 @@
+/* ==========================================================================
+   karol.chlasta.pl
+   Visual direction "Signal": light, product-landing, sans-serif.
+   Palette derived from the Kozminski University portrait session —
+   navy backdrop, gold tie.
+   ========================================================================== */
+
+/* --- fonts ---------------------------------------------------------------- */
+
+/* IBM Plex Sans — headings, UI, running text */
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-sans-latin-ext-600-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* IBM Plex Mono — labels, years, metadata */
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/ibm-plex-mono-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Source Serif 4 — publication entries and the long bio paragraph only */
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-400-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-ext-400-normal.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-400-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+2000-206F,
+    U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215;
+}
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/source-serif-4-latin-ext-400-italic.woff2") format("woff2");
+  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB,
+    U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* --- tokens --------------------------------------------------------------- */
+
+:root {
+  --paper: #ffffff;
+  --panel: #f3f6fa;
+  --ink: #0d1420;
+  --muted: #59647a;
+  --hair: #e1e7ef;
+  --navy: #143a72;
+  --gold: #9c7222;
+
+  --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  --step--2: 0.75rem;
+  --step--1: 0.875rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+  --step-3: 1.75rem;
+  --step-4: 2.5rem;
+  --step-5: 3.25rem;
+
+  --measure: 65ch;
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --page: 68rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #0d1218;
+    --panel: #151d28;
+    --ink: #e6eaf1;
+    --muted: #8593a8;
+    --hair: #222c39;
+    --navy: #86abe9;
+    --gold: #d3a24a;
+  }
+}
+
+:root[data-theme="dark"] {
+  --paper: #0d1218;
+  --panel: #151d28;
+  --ink: #e6eaf1;
+  --muted: #8593a8;
+  --hair: #222c39;
+  --navy: #86abe9;
+  --gold: #d3a24a;
+}
+
+:root[data-theme="light"] {
+  --paper: #ffffff;
+  --panel: #f3f6fa;
+  --ink: #0d1420;
+  --muted: #59647a;
+  --hair: #e1e7ef;
+  --navy: #143a72;
+  --gold: #9c7222;
+}
+
+/* --- focus --------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* --- reset and base ------------------------------------------------------ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; height: auto; }
+
+a { color: var(--navy); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+
+h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.022em; margin: 0; }
+
+.skip { position: absolute; left: -9999px; }
+.skip:focus {
+  left: var(--gutter);
+  top: 0.5rem;
+  z-index: 10;
+  background: var(--paper);
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--hair);
+}
+
+.wrap { max-width: var(--page); margin: 0 auto; padding-inline: var(--gutter); }
+
+.eyebrow {
+  font-size: var(--step--2);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+  margin: 0;
+}
+
+.sechead {
+  font-family: var(--mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+
+.section { padding-block: clamp(3rem, 7vw, 5.5rem); border-top: 1px solid var(--hair); }
+
+.note { font-size: var(--step--2); color: var(--muted); }
+
+/* --- navigation ---------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--paper);
+  border-bottom: 1px solid transparent;
+  transition: border-color 160ms ease;
+}
+.nav[data-scrolled="true"] { border-bottom-color: var(--hair); }
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.5rem;
+  flex-wrap: wrap;
+}
+.nav a { color: inherit; text-decoration: none; }
+.nav strong { font-weight: 600; }
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: clamp(0.75rem, 2vw, 1.4rem);
+  margin: 0;
+  padding: 0;
+  font-size: var(--step--1);
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+.nav ul a:hover, .nav ul a[aria-current="page"] { color: var(--ink); }
+
+.theme-toggle {
+  font: inherit;
+  font-size: var(--step--1);
+  color: var(--muted);
+  background: none;
+  border: 1px solid var(--hair);
+  border-radius: 0.35rem;
+  padding: 0.25rem 0.6rem;
+  cursor: pointer;
+}
+.theme-toggle:hover { color: var(--ink); }
+
+/* --- hero ---------------------------------------------------------------- */
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: clamp(1.5rem, 5vw, 3rem);
+  align-items: center;
+  padding-block: clamp(2.5rem, 8vw, 5rem);
+}
+.hero--solo { grid-template-columns: 1fr; }
+.hero h1 {
+  font-size: clamp(2rem, 6vw, var(--step-5));
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  margin-block: 0.9rem 1rem;
+}
+.hero p { color: var(--muted); max-width: 34rem; margin: 0 0 1.6rem; font-size: var(--step-1); }
+.hero img { border-radius: 0.7rem; display: block; }
+
+.btn {
+  display: inline-block;
+  font-size: var(--step--1);
+  font-weight: 600;
+  padding: 0.65rem 1.15rem;
+  border-radius: 0.4rem;
+  background: var(--navy);
+  color: var(--paper);
+  text-decoration: none;
+}
+.btn--ghost { background: transparent; color: var(--ink); border: 1px solid var(--hair); }
+.cta { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+/* --- stats --------------------------------------------------------------- */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  border-block: 1px solid var(--hair);
+  margin: 0;
+}
+.stats > div { padding: 1.1rem 0; }
+.stats > div + div { border-left: 1px solid var(--hair); padding-left: 1.1rem; }
+.stats dt {
+  font-size: var(--step-3);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.stats dd { margin: 0; font-size: var(--step--2); color: var(--muted); }
+
+/* --- pillars and cards --------------------------------------------------- */
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: 1rem;
+}
+.pill { background: var(--panel); border-radius: 0.6rem; padding: 1.5rem; }
+.pill h3 { font-size: var(--step-1); font-weight: 600; margin-bottom: 0.5rem; }
+.pill p { margin: 0; color: var(--muted); font-size: var(--step--1); }
+.pill p + p { margin-top: 0.7rem; }
+
+/* --- roles --------------------------------------------------------------- */
+
+.roles { list-style: none; margin: 0; padding: 0; display: grid; gap: 1rem; }
+.roles li { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; }
+.roles time {
+  font-family: var(--mono);
+  font-size: var(--step--2);
+  color: var(--gold);
+  letter-spacing: 0.04em;
+  padding-top: 0.2rem;
+}
+.roles strong { font-weight: 600; }
+.roles span { display: block; color: var(--muted); font-size: var(--step--1); }
+
+/* --- publications, theses, preprints and talks --------------------------- */
+
+.pub-list, .talk-list {
+  margin: 0;
+  padding-left: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.pub, .thesis, .preprint {
+  font-family: var(--serif);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  max-width: var(--measure);
+}
+.pub cite, .thesis cite, .preprint cite { font-style: italic; }
+.talk { font-size: var(--step--1); line-height: 1.6; max-width: var(--measure); }
+.pub-link, .licence {
+  font-family: var(--mono);
+  font-size: var(--step--2);
+  white-space: nowrap;
+}
+.pub-link { margin-right: 0.6rem; }
+.licence { color: var(--muted); }
+.award {
+  font-family: var(--mono);
+  font-size: var(--step--2);
+  color: var(--gold);
+  white-space: nowrap;
+}
+.year {
+  font-family: var(--mono);
+  font-size: var(--step--2);
+  letter-spacing: 0.12em;
+  color: var(--gold);
+  margin-block: 2rem 1rem;
+}
+
+/* --- teaching and service ------------------------------------------------ */
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: 1.75rem 2.5rem;
+}
+.cols h3 { font-size: var(--step-0); font-weight: 600; margin-bottom: 0.6rem; }
+.cols ul { margin: 0; padding-left: 1.2rem; font-size: var(--step--1); color: var(--muted); }
+.cols li + li { margin-top: 0.4rem; }
+
+/* --- awards -------------------------------------------------------------- */
+
+.awards { list-style: none; margin: 0 0 1.75rem; padding: 0; display: grid; gap: 0.8rem; }
+.awards li { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; }
+.awards time {
+  font-family: var(--mono);
+  font-size: var(--step--2);
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.awards span { color: var(--muted); font-size: var(--step--1); }
+.awards strong { color: var(--ink); font-weight: 600; font-size: var(--step-0); }
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.75rem;
+}
+.gallery img { border-radius: 0.4rem; display: block; width: 100%; }
+.gallery figure { margin: 0; }
+.gallery figcaption { font-size: var(--step--2); color: var(--muted); margin-top: 0.4rem; }
+
+/* --- beyond work --------------------------------------------------------- */
+
+.beyond { display: grid; grid-template-columns: 1.5fr 1fr; gap: clamp(1.5rem, 5vw, 3rem); align-items: start; }
+.beyond p { max-width: var(--measure); margin: 0 0 1rem; }
+.beyond img { border-radius: 0.6rem; display: block; }
+
+/* --- contact and footer -------------------------------------------------- */
+
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  font-size: var(--step--1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+footer.site {
+  border-top: 1px solid var(--hair);
+  padding-block: 2rem;
+  font-size: var(--step--2);
+  color: var(--muted);
+}
+
+/* --- narrow screens ------------------------------------------------------ */
+
+@media (max-width: 46rem) {
+  .hero, .beyond { grid-template-columns: 1fr; }
+  .hero img { max-width: 16rem; }
+  .stats > div + div { border-left: 0; padding-left: 0; }
+  .roles li, .awards li { grid-template-columns: 1fr; gap: 0.2rem; }
+}
+
+/* --- motion -------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .rise { animation: rise 520ms cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .rise:nth-child(2) { animation-delay: 80ms; }
+  .rise:nth-child(3) { animation-delay: 160ms; }
+  .rise:nth-child(4) { animation-delay: 240ms; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* --- contact channels ---------------------------------------------------- */
+
+.channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+  gap: 1.25rem 2.5rem;
+  margin: 0 0 2rem;
+}
+.channels dt { font-size: var(--step-0); }
+.channels dd {
+  margin: 0.15rem 0 0;
+  font-size: var(--step--2);
+  color: var(--muted);
+}

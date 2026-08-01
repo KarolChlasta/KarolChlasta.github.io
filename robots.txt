@@ -1,2 +1,35 @@
 # https://www.robotstxt.org/robotstxt.html
+
+# Everything here is meant to be found, read and cited — including by
+# assistants answering questions on someone's behalf.
 User-agent: *
+Allow: /
+
+# The PDFs under /assets/papers/ are published papers. Several are the
+# publisher's typeset version, reproduced here under open-access terms or as
+# the author's accepted manuscript. They are free to read, link and cite, but
+# they are not offered as training data. Crawlers that collect corpora for
+# model training are asked to skip that directory; the DOI of every paper is
+# on /publications/, so nothing is hidden.
+User-agent: GPTBot
+Disallow: /assets/papers/
+
+User-agent: ClaudeBot
+Disallow: /assets/papers/
+
+User-agent: Google-Extended
+Disallow: /assets/papers/
+
+User-agent: Applebot-Extended
+Disallow: /assets/papers/
+
+User-agent: CCBot
+Disallow: /assets/papers/
+
+User-agent: Bytespider
+Disallow: /assets/papers/
+
+User-agent: meta-externalagent
+Disallow: /assets/papers/
+
+Sitemap: https://karol.chlasta.pl/sitemap.xml

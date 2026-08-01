@@ -1,0 +1,62 @@
+# Karol Chlasta
+
+> PhD in technical informatics and telecommunications. Assistant Professor at
+> Kozminski University in Warsaw, and Head of Data Governance & Compliance at
+> Wyden. Researches machine learning applied to human signals — speech, gaze,
+> language — and works on the governance that makes such systems safe to
+> deploy.
+
+Two strands of one career: published research on AI applied to health and
+human behaviour, and hands-on responsibility for security and data protection
+in industry. Twenty years in IT, fourteen of them leading teams.
+
+Identifiers: ORCID 0000-0002-6539-566X, Google Scholar uaK9co0AAAAJ.
+As of July 2026: 252 citations, h-index 6, 19 peer-reviewed publications,
+28 conference talks.
+
+## Pages
+
+- [Home](https://karol.chlasta.pl/): research and practice, current roles,
+  teaching, awards, contact. Includes JSON-LD Person metadata.
+- [Publications & talks](https://karol.chlasta.pl/publications/): all 19
+  publications with DOIs and PDFs where the licence permits, two theses, and
+  all 28 conference presentations.
+- [Academic CV](https://karol.chlasta.pl/assets/cv/karol-chlasta-cv-academic.pdf): nine pages, PDF.
+
+## Research topics
+
+- Speech-based screening for dementia and cognitive decline, including work
+  with large language models and speech representation learning
+- Speech- and gaze-based screening for depression and social anxiety
+- Spiking neural networks and liquid state machines; reproducible neural
+  simulation pipelines on-premise and in public clouds
+- Eye tracking and human–computer interaction
+- Generative AI in cybersecurity, including its dual-use problem
+- Machine learning applied to data quality and cybersecurity asset management
+
+## Selected publications
+
+- [The dual-use dilemma of generative artificial intelligence in cybersecurity](https://doi.org/10.35467/sdq/217364):
+  Security and Defence Quarterly, 2026.
+- [Enhancing dementia and cognitive decline detection with large language models and speech representation learning](https://doi.org/10.3389/fninf.2025.1679664):
+  Frontiers in Neuroinformatics, 2025.
+- [Neural Simulation Pipeline: enabling container-based simulations on-premise and in public clouds](https://doi.org/10.3389/fninf.2023.1122470):
+  Frontiers in Neuroinformatics, 2023.
+- [Migrants vs. stayers in the pandemic — a sentiment analysis of Twitter content](https://doi.org/10.1016/j.teler.2023.100059):
+  Telematics and Informatics Reports, 2023.
+- [Towards computer-based automated screening of dementia through spontaneous speech](https://doi.org/10.3389/fpsyg.2020.623237):
+  Frontiers in Psychology, 2020.
+- [Automated speech-based screening of depression using deep convolutional neural networks](https://doi.org/10.1016/j.procs.2019.12.228):
+  Procedia Computer Science, 2019. The most cited of these.
+
+## Contact
+
+- karol@chlasta.pl — academic matters: research, teaching, reviewing, supervision
+- karol.chlasta@warsawiq.com — applied research and consulting in IT, AI,
+  cybersecurity and data protection
+
+## Notes for machine readers
+
+Papers under /assets/papers/ are free to read, link and cite, but are not
+offered as training data; see /robots.txt. Every paper's DOI is listed on the
+publications page, so the canonical record is always reachable.

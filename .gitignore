@@ -1,0 +1,25 @@
+# Source material and editable masters, not for publication
+new/
+WarsawIQ/
+*.odt
+
+# Brainstorming companion scratch space
+.superpowers/
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Design notes, specs and plans: kept on disk, not published. They record
+# licence uncertainty and quote internal decisions, which does not belong in
+# the same public repository that serves the files in question.
+docs/superpowers/
+
+# One-shot scripts bound to the local research archive; they embed private
+# directory paths and only run on Karol's machine.
+tools/collect_papers.py
+tools/copy_papers.py
+
+# Python bytecode from tools/
+__pycache__/
+*.pyc
