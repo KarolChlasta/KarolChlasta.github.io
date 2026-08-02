@@ -14,7 +14,32 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
-PAGES = ["index.html", "publications/index.html", "privacy/index.html"]
+# Directory prefix -> the value of <html lang> for pages under it.
+LANGS = {"": "en-GB", "pl": "pl", "fr": "fr"}
+
+# Logical page -> path segment per language. The empty prefix is the root.
+PATHS = {
+    "home":         {"": "",              "pl": "",             "fr": ""},
+    "publications": {"": "publications",  "pl": "publikacje",   "fr": "publications"},
+    "privacy":      {"": "privacy",       "pl": "prywatnosc",   "fr": "confidentialite"},
+}
+
+
+def page_file(page: str, lang: str) -> str:
+    """Repository-relative path of one page in one language."""
+    parts = [p for p in (lang, PATHS[page][lang]) if p]
+    return "/".join(parts + ["index.html"])
+
+
+def page_url(page: str, lang: str) -> str:
+    parts = [p for p in (lang, PATHS[page][lang]) if p]
+    return "https://karol.chlasta.pl/" + ("/".join(parts) + "/" if parts else "")
+
+
+PAGES = [page_file(p, l) for l in LANGS for p in PATHS]
+LD_PAGES = {page_file("home", l): LANGS[l] for l in LANGS}
+EN_ALIAS = "en/index.html"
+
 CSS = "assets/css/site.css"
 JS = "assets/js/site.js"
 
@@ -116,6 +141,42 @@ def required_files() -> list[str]:
         "assets/img/og-card.jpg",
     ]
     return [f"missing {r}" for r in required if not (ROOT / r).exists()]
+
+
+def language_versions_exist() -> list[str]:
+    fails = [f"missing {p}" for p in PAGES if not (ROOT / p).exists()]
+    if not (ROOT / EN_ALIAS).exists():
+        fails.append(f"missing {EN_ALIAS}")
+    return fails
+
+
+def lang_attribute_matches_path() -> list[str]:
+    """<html lang> must agree with the directory the file sits in."""
+    fails = []
+    for lang, code in LANGS.items():
+        for page in PATHS:
+            rel = page_file(page, lang)
+            src = read(rel)
+            if not src:
+                continue
+            if f'<html lang="{code}">' not in src:
+                fails.append(f'{rel}: expected <html lang="{code}">')
+    return fails
+
+
+def canonical_is_self() -> list[str]:
+    """Each page is its own canonical. A translated page pointing at the
+    English original would ask search engines to drop it from the index."""
+    fails = []
+    for lang in LANGS:
+        for page in PATHS:
+            rel, url = page_file(page, lang), page_url(page, lang)
+            src = read(rel)
+            if not src:
+                continue
+            if f'<link rel="canonical" href="{url}">' not in src:
+                fails.append(f"{rel}: canonical is not {url}")
+    return fails
 
 
 def internal_links() -> list[str]:
@@ -255,16 +316,24 @@ def orcid_linked() -> list[str]:
     return fails
 
 
+# The annotation is page copy, so it is translated; the data-lang marker
+# that drives this check is not.
+LANG_NOTE = {"": "(in Polish)", "pl": "(po polsku)", "fr": "(en polonais)"}
+
+
 def polish_annotated() -> list[str]:
-    src = read("publications/index.html")
     fails = []
-    for cls in ("pub", "talk"):
-        pattern = re.compile(
-            r'<li class="' + cls + r'"[^>]*data-lang="pl"[^>]*>(.*?)</li>', re.S
-        )
-        for i, entry in enumerate(pattern.findall(src), 1):
-            if "(in Polish)" not in entry:
-                fails.append(f'{cls} entry {i} marked data-lang="pl" lacks "(in Polish)"')
+    for lang in LANGS:
+        rel = page_file("publications", lang)
+        src = read(rel)
+        note = LANG_NOTE[lang]
+        for cls in ("pub", "talk"):
+            pattern = re.compile(
+                r'<li class="' + cls + r'"[^>]*data-lang="pl"[^>]*>(.*?)</li>', re.S
+            )
+            for i, entry in enumerate(pattern.findall(src), 1):
+                if note not in entry:
+                    fails.append(f'{rel}: {cls} entry {i} lacks "{note}"')
     return fails
 
 
@@ -290,8 +359,8 @@ def meta_complete() -> list[str]:
         fails.append("index.html has no JSON-LD Person block")
     if "PhD student" in src:
         fails.append("index.html still describes Karol as a PhD student")
-    if 'lang="en"' not in src:
-        fails.append('index.html missing lang="en"')
+    if 'lang="en-GB"' not in src:
+        fails.append('index.html missing lang="en-GB"')
     return fails
 
 
@@ -319,6 +388,139 @@ def theme_tokens() -> list[str]:
     for token in ("--paper", "--panel", "--ink", "--muted", "--hair", "--navy", "--gold"):
         if token not in css:
             fails.append(f"{CSS} missing token {token}")
+    return fails
+
+
+# Regional-indicator symbols. Windows renders these as two-letter country
+# codes rather than flags, so they must never appear in a served file.
+REGIONAL_INDICATORS = re.compile(r"[\U0001F1E6-\U0001F1FF]")
+
+
+def no_emoji_flags() -> list[str]:
+    fails = []
+    for rel in PAGES + [CSS, JS]:
+        if REGIONAL_INDICATORS.search(read(rel)):
+            fails.append(f"{rel} contains an emoji flag; use the inline SVG sprite")
+    return fails
+
+
+def switcher_styles_present() -> list[str]:
+    css = read(CSS)
+    fails = []
+    for needle in (".lang", ".flag", ".sr", "--flagline"):
+        if needle not in css:
+            fails.append(f"{CSS} defines no {needle}")
+    # --flagline must flip with the theme, like every other token.
+    for block in ("prefers-color-scheme: dark", ':root[data-theme="dark"]'):
+        start = css.find(block)
+        if start == -1 or "--flagline" not in css[start:start + 400]:
+            fails.append(f"{CSS}: --flagline not set inside {block!r}")
+    return fails
+
+
+FLAG_ORDER = ["pl", "en", "fr"]
+LANG_NAMES = {"pl": "Polski", "en": "English", "fr": "Français"}
+# hreflang code -> directory prefix
+CODE_TO_LANG = {"en": "", "pl": "pl", "fr": "fr"}
+
+
+def switcher_on_every_page() -> list[str]:
+    """Three links, fixed order, exactly one marked current.
+
+    The order never varies with the page's own language: moving the active
+    flag to the front would make the positions jump between pages.
+    """
+    fails = []
+    block = re.compile(r'<div class="lang">(.*?)</div>', re.S)
+    link = re.compile(r'<a\s+([^>]*)>', re.S)
+    for lang in LANGS:
+        for page in PATHS:
+            rel = page_file(page, lang)
+            src = read(rel)
+            if not src:
+                continue
+            found = block.findall(src)
+            if len(found) != 1:
+                fails.append(f"{rel}: expected 1 switcher, found {len(found)}")
+                continue
+            attrs = link.findall(found[0])
+            if len(attrs) != 3:
+                fails.append(f"{rel}: switcher has {len(attrs)} links, expected 3")
+                continue
+            for i, code in enumerate(FLAG_ORDER):
+                if f'hreflang="{code}"' not in attrs[i]:
+                    fails.append(f"{rel}: link {i + 1} is not {code}; order must be PL, EN, FR")
+            current = [a for a in attrs if 'aria-current="true"' in a]
+            if len(current) != 1:
+                fails.append(f"{rel}: {len(current)} links marked current, expected 1")
+            elif f'hreflang="{HREFLANG[lang]}"' not in current[0]:
+                fails.append(f"{rel}: the current marker is on the wrong language")
+    return fails
+
+
+def switcher_accessible_names() -> list[str]:
+    """A flag is a picture. Each link needs a name a screen reader can say."""
+    fails = []
+    block = re.compile(r'<div class="lang">(.*?)</div>', re.S)
+    anchor = re.compile(r'<a\s[^>]*hreflang="(\w+)"[^>]*>(.*?)</a>', re.S)
+    for lang in LANGS:
+        for page in PATHS:
+            rel = page_file(page, lang)
+            found = block.findall(read(rel))
+            if not found:
+                continue
+            for code, inner in anchor.findall(found[0]):
+                name = LANG_NAMES[code]
+                if f'<span class="sr">{name}</span>' not in inner:
+                    fails.append(f'{rel}: {code} link has no <span class="sr">{name}</span>')
+                if f'#f-{"gb" if code == "en" else code}' not in inner:
+                    fails.append(f"{rel}: {code} link does not use the flag symbol")
+    return fails
+
+
+def slug_map_consistent() -> list[str]:
+    """Switcher targets must match the path map, and stay ASCII."""
+    fails = []
+    block = re.compile(r'<div class="lang">(.*?)</div>', re.S)
+    anchor = re.compile(r'<a\s+href="([^"]+)"[^>]*hreflang="(\w+)"', re.S)
+    for lang in LANGS:
+        for page in PATHS:
+            rel = page_file(page, lang)
+            found = block.findall(read(rel))
+            if not found:
+                continue
+            for href, code in anchor.findall(found[0]):
+                expected = page_url(page, CODE_TO_LANG[code]).replace(
+                    "https://karol.chlasta.pl", "")
+                if href != expected:
+                    fails.append(f"{rel}: {code} link points at {href}, expected {expected}")
+                if not href.isascii():
+                    fails.append(f"{rel}: {href} contains a non-ASCII character")
+    return fails
+
+
+THEME_DATA_ATTRS = ("data-label-dark", "data-label-light",
+                    "data-aria-dark", "data-aria-light")
+
+
+def theme_labels_externalised() -> list[str]:
+    """The theme button's words live in the markup, not in site.js.
+
+    site.js is shared by every language version, so any English string
+    baked into it would leak onto the Polish and French pages.
+    """
+    fails = []
+    js = read(JS)
+    for banned in ("'Dark'", "'Light'", "'Switch to '"):
+        if banned in js:
+            fails.append(f"{JS} still hard-codes {banned}")
+    for page in PAGES:
+        for tag, attrs in tags_of(page):
+            if tag != "button" or "theme-toggle" not in (attrs.get("class") or ""):
+                continue
+            for attr in THEME_DATA_ATTRS:
+                if attrs.get(attr) is None:
+                    fails.append(f"{page}: theme toggle missing {attr}")
     return fails
 
 
@@ -378,12 +580,211 @@ def focus_visible() -> list[str]:
     return fails
 
 
+PERSON_ID = "https://karol.chlasta.pl/#person"
+
+
+def ld_blocks(rel: str) -> list[dict]:
+    """Return every parsed application/ld+json block on a page."""
+    import json
+    pattern = re.compile(
+        r'<script type="application/ld\+json">(.*?)</script>', re.S
+    )
+    out = []
+    for raw in pattern.findall(read(rel)):
+        try:
+            out.append(json.loads(raw))
+        except json.JSONDecodeError as exc:
+            out.append({"__parse_error__": str(exc)})
+    flat = []
+    for node in out:
+        if isinstance(node, dict) and "@graph" in node:
+            flat.extend(node["@graph"])
+        else:
+            flat.append(node)
+    return flat
+
+
+# Values that must follow each home page's own visible content: the first
+# jobTitle entry and the postal address locality. Everything else that
+# identifies the entity (@id, identifier, sameAs, ...) must NOT vary here;
+# see structured_data_matches_page_language below.
+LOCALISED_PERSON_FIELDS = {
+    "": {"jobTitle": "Assistant Professor", "addressLocality": "Warsaw"},
+    "pl": {"jobTitle": "adiunkt", "addressLocality": "Warszawa"},
+    "fr": {"jobTitle": "maître de conférences", "addressLocality": "Varsovie"},
+}
+
+# Fields that pin the three pages to a single entity. Google's own guidance is
+# that structured data must reflect visible content, but the identity of the
+# entity being described is not visible content — it is what makes the three
+# translated pages provably describe one person rather than three unrelated
+# ones. These must be byte-identical across every home page.
+STABLE_PERSON_FIELDS = ("@id", "identifier", "sameAs")
+
+
+def structured_data_matches_page_language() -> list[str]:
+    """The Person node must agree with what the page actually says.
+
+    Task 11 found pl/index.html and fr/index.html both carrying the English
+    Person node verbatim: a Polish page reading "adiunkt w Akademii Leona
+    Koźmińskiego" whose own JSON-LD claimed "Assistant Professor" at
+    "Kozminski University". That mismatch is exactly what Google's structured
+    data guidelines warn against, so this check pins the translatable fields
+    to each language and the identity fields to each other.
+    """
+    fails = []
+    persons = {}
+    for lang in LANGS:
+        rel = page_file("home", lang)
+        people = [node for node in ld_blocks(rel) if node.get("@type") == "Person"]
+        if len(people) != 1:
+            fails.append(f"{rel}: expected exactly 1 Person node, found {len(people)}")
+            continue
+        persons[lang] = people[0]
+
+    for lang, expected in LOCALISED_PERSON_FIELDS.items():
+        person = persons.get(lang)
+        if person is None:
+            continue
+        rel = page_file("home", lang)
+        locality = (person.get("address") or {}).get("addressLocality")
+        if locality != expected["addressLocality"]:
+            fails.append(
+                f'{rel}: addressLocality is {locality!r}, expected {expected["addressLocality"]!r}'
+            )
+        job_titles = person.get("jobTitle") or []
+        first_job = job_titles[0] if job_titles else None
+        if first_job != expected["jobTitle"]:
+            fails.append(
+                f'{rel}: first jobTitle is {first_job!r}, expected {expected["jobTitle"]!r}'
+            )
+
+    langs_present = list(persons)
+    if len(langs_present) > 1:
+        base_lang = langs_present[0]
+        base = persons[base_lang]
+        base_rel = page_file("home", base_lang)
+        for lang in langs_present[1:]:
+            person = persons[lang]
+            rel = page_file("home", lang)
+            for field in STABLE_PERSON_FIELDS:
+                if person.get(field) != base.get(field):
+                    fails.append(
+                        f"{rel}: {field} does not match {base_rel} "
+                        "(the three pages must describe the same entity)"
+                    )
+    return fails
+
+
+def person_has_stable_id() -> list[str]:
+    """Every homepage must describe the same Person, pinned by @id.
+
+    Without @id, three pages each declaring "a Person named Karol Chlasta"
+    may or may not be merged into one entity by a consumer. With it, they
+    provably describe one.
+    """
+    fails = []
+    for page in LD_PAGES:
+        people = [
+            node for node in ld_blocks(page)
+            if node.get("@type") == "Person"
+        ]
+        if len(people) != 1:
+            fails.append(f"{page}: expected exactly 1 Person node, found {len(people)}")
+            continue
+        person = people[0]
+        if person.get("@id") != PERSON_ID:
+            fails.append(f'{page}: Person @id is {person.get("@id")!r}, expected {PERSON_ID!r}')
+        if ORCID not in str(person.get("identifier", "")):
+            fails.append(f"{page}: Person node does not carry the ORCID")
+    return fails
+
+
+# hreflang carries a *country* in its second component, so the region-free
+# forms are deliberate: "en-GB" would exclude Ireland and the United States,
+# "fr-FR" would exclude Switzerland, where Wyden is based.
+HREFLANG = {"": "en", "pl": "pl", "fr": "fr"}
+
+
+def hreflang_reciprocity() -> list[str]:
+    """Every page lists all three versions and itself, plus x-default."""
+    fails = []
+    for lang in LANGS:
+        for page in PATHS:
+            rel = page_file(page, lang)
+            src = read(rel)
+            if not src:
+                continue
+            for other, code in HREFLANG.items():
+                needle = f'<link rel="alternate" hreflang="{code}" href="{page_url(page, other)}">'
+                if needle not in src:
+                    fails.append(f"{rel}: missing alternate {code} -> {page_url(page, other)}")
+            xdefault = f'<link rel="alternate" hreflang="x-default" href="{page_url(page, "")}">'
+            if xdefault not in src:
+                fails.append(f"{rel}: missing x-default")
+    return fails
+
+
+def en_alias_redirects() -> list[str]:
+    src = read(EN_ALIAS)
+    fails = []
+    if 'http-equiv="refresh"' not in src:
+        fails.append(f"{EN_ALIAS} has no meta refresh")
+    if 'rel="canonical" href="https://karol.chlasta.pl/"' not in src:
+        fails.append(f"{EN_ALIAS} does not declare the root as canonical")
+    if "hreflang" in src:
+        fails.append(f"{EN_ALIAS} must not participate in the hreflang set")
+    return fails
+
+
+def webpage_inlanguage() -> list[str]:
+    """Each homepage needs a WebPage node stating its own language."""
+    fails = []
+    for page, lang in LD_PAGES.items():
+        pages = [
+            node for node in ld_blocks(page)
+            if node.get("@type") == "WebPage"
+        ]
+        if len(pages) != 1:
+            fails.append(f"{page}: expected exactly 1 WebPage node, found {len(pages)}")
+            continue
+        node = pages[0]
+        if node.get("inLanguage") != lang:
+            fails.append(f'{page}: WebPage inLanguage is {node.get("inLanguage")!r}, expected {lang!r}')
+        main = node.get("mainEntity")
+        ref = main.get("@id") if isinstance(main, dict) else main
+        if ref != PERSON_ID:
+            fails.append(f"{page}: WebPage mainEntity does not point at {PERSON_ID}")
+    return fails
+
+
+def sitemap_complete() -> list[str]:
+    src = read("sitemap.xml")
+    fails = []
+    for lang in LANGS:
+        for page in PATHS:
+            url = page_url(page, lang)
+            if f"<loc>{url}</loc>" not in src:
+                fails.append(f"sitemap.xml does not list {url}")
+    if "karol.chlasta.pl/en/" in src:
+        fails.append("sitemap.xml lists the /en/ alias, which is a redirect")
+    if src.count("<url>") != len(LANGS) * len(PATHS):
+        fails.append(f"sitemap.xml has {src.count('<url>')} entries, expected 9")
+    return fails
+
+
 CHECKS = [
-    no_cra_leftovers, required_files, internal_links, no_stale_refs,
+    no_cra_leftovers, required_files,
+    language_versions_exist, lang_attribute_matches_path, canonical_is_self,
+    internal_links, no_stale_refs,
     images_complete, fonts_present, no_phone_in_pdfs, publications, talks,
     theses_and_preprints, orcid_linked, polish_annotated, paper_licences,
-    meta_complete, sw_killswitch, theme_tokens, focus_visible,
-    icons_are_ours, ai_crawler_policy,
+    meta_complete, person_has_stable_id, structured_data_matches_page_language,
+    webpage_inlanguage, sw_killswitch,
+    theme_tokens, no_emoji_flags, switcher_styles_present, theme_labels_externalised, focus_visible, icons_are_ours, ai_crawler_policy,
+    hreflang_reciprocity, en_alias_redirects,
+    switcher_on_every_page, switcher_accessible_names, slug_map_consistent,
+    sitemap_complete,
 ]
 
 

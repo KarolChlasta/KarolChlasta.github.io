@@ -8,6 +8,8 @@
     { "src": "/assets/img/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ],
   "start_url": "/",
+  "lang": "en-GB",
+  "dir": "ltr",
   "display": "browser",
   "theme_color": "#143a72",
   "background_color": "#ffffff"

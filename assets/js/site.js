@@ -24,10 +24,21 @@
     // button for readers without JavaScript.
     toggle.hidden = false;
 
+    // The words live in the markup so this file stays language-neutral —
+    // no English may appear below this line. When an attribute is absent,
+    // keep whatever the markup already rendered rather than blanking the
+    // control: an empty button with no accessible name is worse than a
+    // button labelled in the wrong language.
+    var text = function (name) {
+      return toggle.getAttribute('data-' + name);
+    };
+
     var label = function () {
-      var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      toggle.textContent = next === 'dark' ? 'Dark' : 'Light';
-      toggle.setAttribute('aria-label', 'Switch to ' + next + ' theme');
+      var dark = currentTheme() !== 'dark';
+      var word = text(dark ? 'label-dark' : 'label-light');
+      var described = text(dark ? 'aria-dark' : 'aria-light');
+      if (word) { toggle.textContent = word; }
+      if (described) { toggle.setAttribute('aria-label', described); }
     };
     label();
 

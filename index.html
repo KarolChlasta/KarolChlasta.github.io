@@ -1,11 +1,15 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Karol Chlasta — AI research and security governance</title>
 <meta name="description" content="Karol Chlasta, PhD — Assistant Professor at Kozminski University and Head of Data Governance &amp; Compliance at Wyden. Machine learning on human signals, and the governance that makes it safe to deploy.">
 <link rel="canonical" href="https://karol.chlasta.pl/">
+<link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/">
+<link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/">
+<link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/">
+<link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/">
 <link rel="icon" href="/favicon.ico">
 <link rel="apple-touch-icon" href="/assets/img/icon-180.png">
 <link rel="manifest" href="/manifest.json">
@@ -16,6 +20,9 @@
 <meta property="og:description" content="Assistant Professor at Kozminski University. Head of Data Governance &amp; Compliance at Wyden. 19 publications, 28 conference talks.">
 <meta property="og:image" content="https://karol.chlasta.pl/assets/img/og-card.jpg">
 <meta property="og:url" content="https://karol.chlasta.pl/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="pl_PL">
+<meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://karol.chlasta.pl/assets/img/og-card.jpg">
 
@@ -24,57 +31,91 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Karol Chlasta",
-  "honorificPrefix": "PhD",
-  "url": "https://karol.chlasta.pl/",
-  "image": "https://karol.chlasta.pl/assets/img/portrait-hero.jpg",
-  "jobTitle": [
-    "Assistant Professor",
-    "Head of Data Governance and Compliance",
-    "Data Protection Advisor",
-    "Data Protection Officer"
-  ],
-  "email": "mailto:karol@chlasta.pl",
-  "address": { "@type": "PostalAddress", "addressLocality": "Warsaw", "addressCountry": "PL" },
-  "identifier": {
-    "@type": "PropertyValue",
-    "propertyID": "ORCID",
-    "value": "https://orcid.org/0000-0002-6539-566X"
-  },
-  "affiliation": [
+  "@graph": [
     {
-      "@type": "Organization",
-      "name": "Kozminski University",
-      "department": [
-        { "@type": "Organization", "name": "Institute of Computer Science" },
-        { "@type": "Organization", "name": "Department of Management in Networked and Digital Societies (MiNDS)" }
-      ]
+      "@type": "WebPage",
+      "@id": "https://karol.chlasta.pl/#webpage",
+      "url": "https://karol.chlasta.pl/",
+      "inLanguage": "en-GB",
+      "mainEntity": { "@id": "https://karol.chlasta.pl/#person" }
     },
-    { "@type": "Organization", "name": "Wyden AG" },
-    { "@type": "Organization", "name": "WarsawIQ" }
-  ],
-  "alumniOf": [
-    { "@type": "CollegeOrUniversity", "name": "Polish-Japanese Academy of Information Technology" },
-    { "@type": "CollegeOrUniversity", "name": "University College Dublin" },
-    { "@type": "CollegeOrUniversity", "name": "Warsaw University of Technology" },
-    { "@type": "CollegeOrUniversity", "name": "Cracow University of Economics" }
-  ],
-  "knowsAbout": [
-    "Machine learning", "Speech processing", "Cybersecurity",
-    "Data governance", "Spiking neural networks", "Eye tracking"
-  ],
-  "sameAs": [
-    "https://orcid.org/0000-0002-6539-566X",
-    "https://scholar.google.com/citations?user=uaK9co0AAAAJ",
-    "https://www.linkedin.com/in/karolchlasta",
-    "https://github.com/KarolChlasta",
-    "https://warsawiq.com"
+    {
+      "@type": "Person",
+      "@id": "https://karol.chlasta.pl/#person",
+      "name": "Karol Chlasta",
+      "honorificPrefix": "PhD",
+      "url": "https://karol.chlasta.pl/",
+      "image": "https://karol.chlasta.pl/assets/img/portrait-hero.jpg",
+      "jobTitle": [
+        "Assistant Professor",
+        "Head of Data Governance and Compliance",
+        "Data Protection Advisor",
+        "Data Protection Officer"
+      ],
+      "email": "mailto:karol@chlasta.pl",
+      "address": { "@type": "PostalAddress", "addressLocality": "Warsaw", "addressCountry": "PL" },
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "ORCID",
+        "value": "https://orcid.org/0000-0002-6539-566X"
+      },
+      "affiliation": [
+        {
+          "@type": "Organization",
+          "name": "Kozminski University",
+          "department": [
+            { "@type": "Organization", "name": "Institute of Computer Science" },
+            { "@type": "Organization", "name": "Department of Management in Networked and Digital Societies (MiNDS)" }
+          ]
+        },
+        { "@type": "Organization", "name": "Wyden AG" },
+        { "@type": "Organization", "name": "WarsawIQ" }
+      ],
+      "alumniOf": [
+        { "@type": "CollegeOrUniversity", "name": "Polish-Japanese Academy of Information Technology" },
+        { "@type": "CollegeOrUniversity", "name": "University College Dublin" },
+        { "@type": "CollegeOrUniversity", "name": "Warsaw University of Technology" },
+        { "@type": "CollegeOrUniversity", "name": "Cracow University of Economics" }
+      ],
+      "knowsAbout": [
+        "Machine learning", "Speech processing", "Cybersecurity",
+        "Data governance", "Spiking neural networks", "Eye tracking"
+      ],
+      "sameAs": [
+        "https://orcid.org/0000-0002-6539-566X",
+        "https://scholar.google.com/citations?user=uaK9co0AAAAJ",
+        "https://www.linkedin.com/in/karolchlasta",
+        "https://github.com/KarolChlasta",
+        "https://warsawiq.com"
+      ]
+    }
   ]
 }
 </script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="f-pl" viewBox="0 0 21 15">
+    <rect width="21" height="15" fill="#fff"/>
+    <rect y="7.5" width="21" height="7.5" fill="#d4213d"/>
+  </symbol>
+  <symbol id="f-fr" viewBox="0 0 21 15">
+    <rect width="21" height="15" fill="#fff"/>
+    <rect width="7" height="15" fill="#002395"/>
+    <rect x="14" width="7" height="15" fill="#ed2939"/>
+  </symbol>
+  <symbol id="f-gb" viewBox="0 0 60 30">
+    <clipPath id="gb-a"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="gb-b"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <g clip-path="url(#gb-a)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gb-b)" stroke="#c8102e" stroke-width="4"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#c8102e" stroke-width="6"/>
+    </g>
+  </symbol>
+</svg>
 <a class="skip" href="#main">Skip to content</a>
 
 <nav class="nav" aria-label="Primary">
@@ -88,7 +129,17 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <button class="theme-toggle" type="button" hidden>Dark</button>
+    <div class="nav-right">
+      <div class="lang">
+        <a href="/pl/" hreflang="pl" lang="pl" title="Polski"><svg class="flag"><use href="#f-pl"/></svg><span class="sr">Polski</span></a>
+        <a href="/" hreflang="en" lang="en" title="English" aria-current="true"><svg class="flag"><use href="#f-gb"/></svg><span class="sr">English</span></a>
+        <a href="/fr/" hreflang="fr" lang="fr" title="Français"><svg class="flag"><use href="#f-fr"/></svg><span class="sr">Français</span></a>
+      </div>
+      <button class="theme-toggle" type="button" hidden
+              data-label-dark="Dark" data-label-light="Light"
+              data-aria-dark="Switch to dark theme"
+              data-aria-light="Switch to light theme">Dark</button>
+    </div>
   </div>
 </nav>
 
@@ -350,7 +401,7 @@
         <time>2005</time>
         <div>
           <strong>Outstanding Academic Achievement Award</strong>
-          <span>Polish Minister of Higher Education.</span>
+          <span>Polish Minister of National Education and Sport.</span>
         </div>
       </li>
     </ul>
@@ -359,7 +410,7 @@
       <figure>
         <img src="/assets/img/award-cio-5.jpg" width="1200" height="750" loading="lazy" decoding="async"
              alt="Karol Chlasta on stage holding his certificate beside the host, in front of a screen reading CIO awards 2017">
-        <figcaption>Receiving the award, London, 2017.</figcaption>
+        <figcaption>Receiving the award, City of London, 2017.</figcaption>
       </figure>
       <figure>
         <img src="/assets/img/award-cio-6.jpg" width="1200" height="750" loading="lazy" decoding="async"
@@ -374,7 +425,7 @@
       <figure>
         <img src="/assets/img/award-cio-3.jpg" width="1200" height="750" loading="lazy" decoding="async"
              alt="Wide view of the gilded domed banqueting hall with guests seated at round tables">
-        <figcaption>The venue.</figcaption>
+        <figcaption>The venue, in the City of London.</figcaption>
       </figure>
     </div>
   </section>

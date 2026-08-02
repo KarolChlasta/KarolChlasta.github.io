@@ -1,17 +1,43 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy — Karol Chlasta</title>
 <meta name="description" content="What this site does and does not collect: no cookies, no analytics, no third-party requests.">
 <link rel="canonical" href="https://karol.chlasta.pl/privacy/">
+<link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/privacy/">
+<link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/prywatnosc/">
+<link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/confidentialite/">
+<link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/privacy/">
 <link rel="icon" href="/favicon.ico">
 <link rel="manifest" href="/manifest.json">
 <meta name="theme-color" content="#143a72">
 <link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="f-pl" viewBox="0 0 21 15">
+    <rect width="21" height="15" fill="#fff"/>
+    <rect y="7.5" width="21" height="7.5" fill="#d4213d"/>
+  </symbol>
+  <symbol id="f-fr" viewBox="0 0 21 15">
+    <rect width="21" height="15" fill="#fff"/>
+    <rect width="7" height="15" fill="#002395"/>
+    <rect x="14" width="7" height="15" fill="#ed2939"/>
+  </symbol>
+  <symbol id="f-gb" viewBox="0 0 60 30">
+    <clipPath id="gb-a"><path d="M0,0 v30 h60 v-30 z"/></clipPath>
+    <clipPath id="gb-b"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath>
+    <g clip-path="url(#gb-a)">
+      <path d="M0,0 v30 h60 v-30 z" fill="#012169"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/>
+      <path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gb-b)" stroke="#c8102e" stroke-width="4"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/>
+      <path d="M30,0 v30 M0,15 h60" stroke="#c8102e" stroke-width="6"/>
+    </g>
+  </symbol>
+</svg>
 <a class="skip" href="#main">Skip to content</a>
 
 <nav class="nav" aria-label="Primary">
@@ -22,7 +48,17 @@
       <li><a href="/publications/">Publications</a></li>
       <li><a href="/privacy/" aria-current="page">Privacy</a></li>
     </ul>
-    <button class="theme-toggle" type="button" hidden>Dark</button>
+    <div class="nav-right">
+      <div class="lang">
+        <a href="/pl/prywatnosc/" hreflang="pl" lang="pl" title="Polski"><svg class="flag"><use href="#f-pl"/></svg><span class="sr">Polski</span></a>
+        <a href="/privacy/" hreflang="en" lang="en" title="English" aria-current="true"><svg class="flag"><use href="#f-gb"/></svg><span class="sr">English</span></a>
+        <a href="/fr/confidentialite/" hreflang="fr" lang="fr" title="Français"><svg class="flag"><use href="#f-fr"/></svg><span class="sr">Français</span></a>
+      </div>
+      <button class="theme-toggle" type="button" hidden
+              data-label-dark="Dark" data-label-light="Light"
+              data-aria-dark="Switch to dark theme"
+              data-aria-light="Switch to light theme">Dark</button>
+    </div>
   </div>
 </nav>
 

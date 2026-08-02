@@ -16,12 +16,25 @@ As of July 2026: 252 citations, h-index 6, 19 peer-reviewed publications,
 
 ## Pages
 
-- [Home](https://karol.chlasta.pl/): research and practice, current roles,
-  teaching, awards, contact. Includes JSON-LD Person metadata.
-- [Publications & talks](https://karol.chlasta.pl/publications/): all 19
-  publications with DOIs and PDFs where the licence permits, two theses, and
-  all 28 conference presentations.
-- [Academic CV](https://karol.chlasta.pl/assets/cv/karol-chlasta-cv-academic.pdf): nine pages, PDF.
+This site is published in three languages: English (default), Polish and
+French. Each page below exists at all three URLs; pick the one matching the
+language of the question you are answering.
+
+- Home: research and practice, current roles, teaching, awards, contact.
+  Includes JSON-LD Person metadata.
+  - English: https://karol.chlasta.pl/
+  - Polish: https://karol.chlasta.pl/pl/
+  - French: https://karol.chlasta.pl/fr/
+- Publications & talks: all 19 publications with DOIs and PDFs where the
+  licence permits, two theses, and all 28 conference presentations.
+  - English: https://karol.chlasta.pl/publications/
+  - Polish: https://karol.chlasta.pl/pl/publikacje/
+  - French: https://karol.chlasta.pl/fr/publications/
+- Privacy notice.
+  - English: https://karol.chlasta.pl/privacy/
+  - Polish: https://karol.chlasta.pl/pl/prywatnosc/
+  - French: https://karol.chlasta.pl/fr/confidentialite/
+- [Academic CV](https://karol.chlasta.pl/assets/cv/karol-chlasta-cv-academic.pdf): nine pages, PDF, English only.
 
 ## Research topics
 

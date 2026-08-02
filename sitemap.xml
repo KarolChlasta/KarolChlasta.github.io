@@ -1,18 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://karol.chlasta.pl/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/"/>
+    <lastmod>2026-08-02</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://karol.chlasta.pl/publications/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/publications/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/publikacje/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/publications/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/publications/"/>
+    <lastmod>2026-08-02</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://karol.chlasta.pl/privacy/</loc>
-    <lastmod>2026-07-30</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/prywatnosc/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/confidentialite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/privacy/"/>
+    <lastmod>2026-08-02</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://karol.chlasta.pl/pl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/"/>
+    <lastmod>2026-08-02</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://karol.chlasta.pl/pl/publikacje/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/publications/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/publikacje/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/publications/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/publications/"/>
+    <lastmod>2026-08-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://karol.chlasta.pl/pl/prywatnosc/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/prywatnosc/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/confidentialite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/privacy/"/>
+    <lastmod>2026-08-02</lastmod>
+    <priority>0.2</priority>
+  </url>
+  <url>
+    <loc>https://karol.chlasta.pl/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/"/>
+    <lastmod>2026-08-02</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://karol.chlasta.pl/fr/publications/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/publications/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/publikacje/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/publications/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/publications/"/>
+    <lastmod>2026-08-02</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://karol.chlasta.pl/fr/confidentialite/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://karol.chlasta.pl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://karol.chlasta.pl/pl/prywatnosc/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://karol.chlasta.pl/fr/confidentialite/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://karol.chlasta.pl/privacy/"/>
+    <lastmod>2026-08-02</lastmod>
     <priority>0.2</priority>
   </url>
 </urlset>

@@ -113,6 +113,7 @@
   --hair: #e1e7ef;
   --navy: #143a72;
   --gold: #9c7222;
+  --flagline: rgba(13, 20, 32, 0.2);
 
   --sans: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --serif: "Source Serif 4", Georgia, "Times New Roman", serif;
@@ -141,6 +142,7 @@
     --hair: #222c39;
     --navy: #86abe9;
     --gold: #d3a24a;
+    --flagline: rgba(230, 234, 241, 0.3);
   }
 }
 
@@ -152,6 +154,7 @@
   --hair: #222c39;
   --navy: #86abe9;
   --gold: #d3a24a;
+  --flagline: rgba(230, 234, 241, 0.3);
 }
 
 :root[data-theme="light"] {
@@ -162,6 +165,7 @@
   --hair: #e1e7ef;
   --navy: #143a72;
   --gold: #9c7222;
+  --flagline: rgba(13, 20, 32, 0.2);
 }
 
 /* --- focus --------------------------------------------------------------- */
@@ -273,6 +277,52 @@ h1, h2, h3, h4 { text-wrap: balance; letter-spacing: -0.022em; margin: 0; }
   cursor: pointer;
 }
 .theme-toggle:hover { color: var(--ink); }
+
+/* --- language switcher ---------------------------------------------------- */
+
+.nav-right { display: flex; align-items: center; gap: 0.75rem; }
+
+/* Three plain links. No JavaScript: the language lives in the URL, so the
+   control works with scripting off and is followed by search engines. */
+.lang { display: flex; align-items: center; gap: 0.1rem; }
+.lang a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 1.75rem = 28px. WCAG 2.2 SC 2.5.8 asks for 24px; the flag itself is
+     21 x 15, which would be an unreachable target on a phone. */
+  min-width: 1.75rem;
+  min-height: 1.75rem;
+  border-radius: 0.3rem;
+  opacity: 0.5;
+  transition: opacity 140ms ease;
+}
+.lang a:hover, .lang a:focus-visible, .lang a[aria-current="true"] { opacity: 1; }
+.lang .flag {
+  display: block;
+  width: 1.3125rem;
+  height: 0.9375rem;
+  border-radius: 0.1rem;
+  /* Without this the white half of the Polish flag vanishes on the light
+     nav bar, and the navy of the Union Jack vanishes on the dark one. */
+  outline: 1px solid var(--flagline);
+  outline-offset: -1px;
+}
+/* The inner ring is paper-coloured, so the marker reads on both themes. */
+.lang a[aria-current="true"] .flag {
+  box-shadow: 0 0 0 2px var(--paper), 0 0 0 3.5px var(--navy);
+}
+
+/* Visible only to a screen reader. Unlike .skip this never returns on
+   focus — the language names are permanent alternative text. */
+.sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
 
 /* --- hero ---------------------------------------------------------------- */
 
@@ -459,6 +509,7 @@ footer.site {
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .lang a { transition: none; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
