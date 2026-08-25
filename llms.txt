@@ -11,8 +11,8 @@ human behaviour, and hands-on responsibility for security and data protection
 in industry. Twenty years in IT, fourteen of them leading teams.
 
 Identifiers: ORCID 0000-0002-6539-566X, Google Scholar uaK9co0AAAAJ.
-As of July 2026: 252 citations, h-index 6, 19 peer-reviewed publications,
-28 conference talks.
+As of August 2026: 251 citations, h-index 6, 19 peer-reviewed publications,
+29 conference and invited talks.
 
 ## Pages
 
@@ -26,7 +26,8 @@ language of the question you are answering.
   - Polish: https://karol.chlasta.pl/pl/
   - French: https://karol.chlasta.pl/fr/
 - Publications & talks: all 19 publications with DOIs and PDFs where the
-  licence permits, two theses, and all 28 conference presentations.
+  licence permits, two theses, and all 29 conference presentations and
+  invited talks.
   - English: https://karol.chlasta.pl/publications/
   - Polish: https://karol.chlasta.pl/pl/publikacje/
   - French: https://karol.chlasta.pl/fr/publications/
