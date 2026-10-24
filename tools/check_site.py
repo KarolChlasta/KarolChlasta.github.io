@@ -311,8 +311,8 @@ def orcid_linked() -> list[str]:
     fails = []
     if ORCID not in src:
         fails.append(f"index.html does not link the ORCID {ORCID}")
-    if "252" not in src or "h-index" not in src.lower():
-        fails.append("index.html does not show the Scholar metrics (252 citations, h-index 6)")
+    if "270" not in src or "h-index" not in src.lower():
+        fails.append("index.html does not show the Scholar metrics (270 citations, h-index 6)")
     return fails
 
 
