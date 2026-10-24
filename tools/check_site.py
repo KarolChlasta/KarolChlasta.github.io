@@ -62,8 +62,8 @@ FONT_FILES = [
     "source-serif-4-latin-ext-400-italic.woff2",
 ]
 
-EXPECTED_PUBLICATIONS = 19
-EXPECTED_TALKS = 28
+EXPECTED_PUBLICATIONS = 20
+EXPECTED_TALKS = 29
 EXPECTED_THESES = 2
 
 # Zero by design. The arXiv posting "Sentiment analysis model for Twitter data

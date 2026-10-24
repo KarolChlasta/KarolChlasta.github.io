@@ -11,8 +11,8 @@ human behaviour, and hands-on responsibility for security and data protection
 in industry. Twenty years in IT, fourteen of them leading teams.
 
 Identifiers: ORCID 0000-0002-6539-566X, Google Scholar uaK9co0AAAAJ.
-As of August 2026: 251 citations, h-index 6, 19 peer-reviewed publications,
-29 conference and invited talks.
+As of August 2026: 251 citations and h-index 6. As of October 2026: 20
+peer-reviewed publications and 29 conference and invited talks.
 
 ## Pages
 
@@ -25,7 +25,7 @@ language of the question you are answering.
   - English: https://karol.chlasta.pl/
   - Polish: https://karol.chlasta.pl/pl/
   - French: https://karol.chlasta.pl/fr/
-- Publications & talks: all 19 publications with DOIs and PDFs where the
+- Publications & talks: all 20 publications with DOIs and PDFs where the
   licence permits, two theses, and all 29 conference presentations and
   invited talks.
   - English: https://karol.chlasta.pl/publications/
@@ -42,6 +42,9 @@ language of the question you are answering.
 - Speech-based screening for dementia and cognitive decline, including work
   with large language models and speech representation learning
 - Speech- and gaze-based screening for depression and social anxiety
+- Multimodal depression detection from gait, audio-visual interviews and
+  personality descriptions, including the calibration limits of domain-adapted
+  LLMs (MPDD-AVG Grand Challenge, ACM Multimedia 2026)
 - Spiking neural networks and liquid state machines; reproducible neural
   simulation pipelines on-premise and in public clouds
 - Eye tracking and human–computer interaction
@@ -50,6 +53,8 @@ language of the question you are answering.
 
 ## Selected publications
 
+- [HiPAD: A unified gait, audio-visual, and personality fusion network for depression detection](https://arxiv.org/abs/2610.14961):
+  Proceedings of ACM Multimedia 2026, with Piotr Struzik. DOI 10.1145/3767308.3836618.
 - [The dual-use dilemma of generative artificial intelligence in cybersecurity](https://doi.org/10.35467/sdq/217364):
   Security and Defence Quarterly, 2026.
 - [Enhancing dementia and cognitive decline detection with large language models and speech representation learning](https://doi.org/10.3389/fninf.2025.1679664):
