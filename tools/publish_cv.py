@@ -2,7 +2,7 @@
 """Copy the current academic CV into the site, refusing to publish a bad one.
 
 Source of truth is the CV repository, not this one:
-    /datadisk/od-kchlasta/6.Doc/Career/Out/CV/cv/CV-Karol Chlasta-Academic.pdf
+    /datadisk/od-kchlasta/6.Doc/Career/Out/CV/cv/CV-Karol Chlasta-Academic YYYY.MM.DD.pdf  (newest date)
 
 Run:  python3 tools/publish_cv.py
 
@@ -19,7 +19,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE = Path("/datadisk/od-kchlasta/6.Doc/Career/Out/CV/cv/CV-Karol Chlasta-Academic.pdf")
+CV_DIR = Path("/datadisk/od-kchlasta/6.Doc/Career/Out/CV/cv")
+# The CV repository names each export by date; the newest dated file is the current CV.
+SOURCE = max(CV_DIR.glob("CV-Karol Chlasta-Academic 20??.??.??.pdf"), default=CV_DIR / "CV-Karol Chlasta-Academic.pdf")
 TARGET = ROOT / "assets/cv/karol-chlasta-cv-academic.pdf"
 
 # Digest of the nine digits, never the digits themselves — this file is public.

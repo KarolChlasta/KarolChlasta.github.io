@@ -35,7 +35,7 @@ language of the question you are answering.
   - English: https://karol.chlasta.pl/privacy/
   - Polish: https://karol.chlasta.pl/pl/prywatnosc/
   - French: https://karol.chlasta.pl/fr/confidentialite/
-- [Academic CV](https://karol.chlasta.pl/assets/cv/karol-chlasta-cv-academic.pdf): nine pages, PDF, English only.
+- [Academic CV](https://karol.chlasta.pl/assets/cv/karol-chlasta-cv-academic.pdf): ten pages, PDF, English only.
 
 ## Research topics
 
